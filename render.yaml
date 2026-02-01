@@ -3,7 +3,9 @@ services:
     name: portfolio-backend
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn portfolio_backend.wsgi:application
+    startCommand: |
+      python manage.py migrate &&
+      gunicorn portfolio_backend.wsgi:application
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: portfolio_backend.settings
